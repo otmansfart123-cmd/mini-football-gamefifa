@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Football World ⚽</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #e0f7fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2 {
+      color: green;
+    }
+
+    p {
+      width: 80%;
+      margin: auto;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* اللعبة */
+    #game {
+      width: 400px;
+      height: 250px;
+      margin: 20px auto;
+      border: 3px solid black;
+      position: relative;
+      background: #a5d6a7;
+      overflow: hidden;
+    }
+
+    #ball {
+      width: 30px;
+      height: 30px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 10px;
+      left: 180px;
+    }
+
+    #keeper {
+      width: 80px;
+      height: 20px;
+      background: red;
+      position: absolute;
+      top: 10px;
+      left: 160px;
+    }
+
+    #comment {
+      font-size: 18px;
+      margin: 10px;
+      color: blue;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    iframe {
+      margin: 20px 0;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>⚽ Football World ⚽</h1>
+
+<p>
+Football is the most popular sport in the world. Millions of people watch and play it every day. 
+It is a game of teamwork, strategy, and passion. Famous players like Messi and Ronaldo have inspired 
+many young people to follow their dreams. Football is played between two teams of eleven players. 
+The goal is to score by putting the ball into the opponent’s net. It requires speed, skill, and intelligence.
+</p>
+
+<p>
+A goalkeeper is the last line of defense and must use reflexes, anticipation, and strength to stop the ball. 
+Strikers, midfielders, and defenders all have different roles, making football a sport full of excitement 
+and tactics. Every goal, save, and pass creates unforgettable moments for fans around the world.
+</p>
+
+<h2>🎥 Football Video</h2>
+<iframe width="400" height="250"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen>
+</iframe>
+
+<h2>🎮 Messi vs Buffon Game</h2>
+<p id="comment">🎙️ Messi is ready to shoot...</p>
+<p>Score: <span id="score">0</span></p>
+
+<div id="game">
+  <div id="keeper"></div>
+  <div id="ball"></div>
+</div>
+
+<button onclick="shoot()">Shoot ⚽</button>
+
+<script>
+let ball = document.getElementById("ball");
+let keeper = document.getElementById("keeper");
+let comment = document.getElementById("comment");
+let score = 0;
+
+// تحريك الحارس يمين ويسار
+setInterval(() => {
+  keeper.style.left = Math.random() * 320 + "px";
+}, 700);
+
+function shoot() {
+  comment.innerText = "🎙️ Messi shoots!!!";
+
+  let pos = 10;
+
+  let interval = setInterval(() => {
+    pos += 5;
+    ball.style.bottom = pos + "px";
+
+    if (pos >= 200) {
+      clearInterval(interval);
+
+      let ballX = ball.offsetLeft;
+      let keeperX = keeper.offsetLeft;
+
+      if (ballX > keeperX && ballX < keeperX + 80) {
+        comment.innerText = "🧤 Buffon saves it!!!";
+      } else {
+        score++;
+        document.getElementById("score").innerText = score;
+        comment.innerText = "⚽ GOOOOAL!!!";
+
+        // دخول لموقع FIFA بعد تسجيل هدف
+        setTimeout(() => {
+          window.location.href = "https://www.fifa.com";
+        }, 1500);
+      }
+
+      ball.style.bottom = "10px";
+    }
+  }, 20);
+}
+</script>
+
+</body>
+</html>
